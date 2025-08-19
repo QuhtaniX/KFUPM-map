@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-danger {
+    @apply bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .input-field {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+  }
+  
+  .schedule-slot {
+    @apply border border-gray-200 rounded p-2 text-sm;
+  }
+  
+  .schedule-slot.conflict {
+    @apply bg-red-50 border-red-300;
+  }
+  
+  .schedule-slot.preferred {
+    @apply bg-green-50 border-green-300;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Leaflet map customizations */
+.leaflet-container {
+  @apply rounded-lg;
+}
+
+.leaflet-popup-content {
+  @apply text-sm;
+}
+
+.leaflet-popup-content-wrapper {
+  @apply rounded-lg;
+}
+
+/* Loading spinner */
+.spinner {
+  @apply animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600;
+}
+
+/* Schedule grid */
+.schedule-grid {
+  display: grid;
+  grid-template-columns: 100px repeat(5, 1fr);
+  gap: 1px;
+  background-color: #e5e7eb;
+}
+
+.schedule-grid > * {
+  background-color: white;
+  padding: 8px;
+  min-height: 60px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .schedule-grid {
+    grid-template-columns: 80px repeat(5, 1fr);
+    font-size: 0.75rem;
+  }
+  
+  .schedule-grid > * {
+    padding: 4px;
+    min-height: 50px;
+  }
+}

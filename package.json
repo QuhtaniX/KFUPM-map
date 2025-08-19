@@ -1,0 +1,22 @@
+{
+  "name": "kfupm-smart-section-picker",
+  "version": "1.0.0",
+  "description": "KFUPM Smart Section Picker - Help students choose optimal class schedules",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm start",
+    "build": "cd client && npm run build",
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install",
+    "start": "cd server && npm start",
+    "setup": "node setup.js",
+    "populate-data": "cd server && node -e \"require('./data/sampleData').populateSampleData().then(() => process.exit())\""
+  },
+  "keywords": ["kfupm", "schedule", "picker", "academic", "planning"],
+  "author": "KFUPM Smart Section Picker Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
