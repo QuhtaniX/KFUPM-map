@@ -1,13 +1,22 @@
 const express = require('express');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const User = require('../models/User');
 const { auth } = require('../middleware/auth');
 
 const router = express.Router();
 
+// Initialize Stripe only if STRIPE_SECRET_KEY is provided
+let stripe = null;
+if (process.env.STRIPE_SECRET_KEY) {
+  stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+}
+
 // Create payment intent for premium subscription
 router.post('/create-payment-intent', auth, async (req, res) => {
   try {
+    if (!stripe) {
+      return res.status(503).json({ error: 'Payment service not available' });
+    }
+
     const { amount, currency = 'usd' } = req.body;
 
     if (!amount || amount < 500) { // Minimum $5.00
@@ -36,6 +45,10 @@ router.post('/create-payment-intent', auth, async (req, res) => {
 // Create subscription
 router.post('/create-subscription', auth, async (req, res) => {
   try {
+    if (!stripe) {
+      return res.status(503).json({ error: 'Payment service not available' });
+    }
+
     const { paymentMethodId, priceId } = req.body;
 
     if (!paymentMethodId || !priceId) {
@@ -90,6 +103,10 @@ router.post('/create-subscription', auth, async (req, res) => {
 // Cancel subscription
 router.post('/cancel-subscription', auth, async (req, res) => {
   try {
+    if (!stripe) {
+      return res.status(503).json({ error: 'Payment service not available' });
+    }
+
     if (!req.user.subscription.stripeSubscriptionId) {
       return res.status(400).json({ error: 'No active subscription found' });
     }
@@ -112,6 +129,10 @@ router.post('/cancel-subscription', auth, async (req, res) => {
 // Reactivate subscription
 router.post('/reactivate-subscription', auth, async (req, res) => {
   try {
+    if (!stripe) {
+      return res.status(503).json({ error: 'Payment service not available' });
+    }
+
     if (!req.user.subscription.stripeSubscriptionId) {
       return res.status(400).json({ error: 'No subscription found' });
     }
@@ -134,6 +155,10 @@ router.post('/reactivate-subscription', auth, async (req, res) => {
 // Get subscription status
 router.get('/subscription-status', auth, async (req, res) => {
   try {
+    if (!stripe) {
+      return res.status(503).json({ error: 'Payment service not available' });
+    }
+
     if (!req.user.subscription.stripeSubscriptionId) {
       return res.json({
         hasSubscription: false,
@@ -161,6 +186,10 @@ router.get('/subscription-status', auth, async (req, res) => {
 // Get payment history
 router.get('/payment-history', auth, async (req, res) => {
   try {
+    if (!stripe) {
+      return res.status(503).json({ error: 'Payment service not available' });
+    }
+
     if (!req.user.subscription.stripeCustomerId) {
       return res.json({ payments: [] });
     }
@@ -187,6 +216,10 @@ router.get('/payment-history', auth, async (req, res) => {
 
 // Webhook for Stripe events
 router.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  if (!stripe) {
+    return res.status(503).json({ error: 'Payment service not available' });
+  }
+
   const sig = req.headers['stripe-signature'];
   let event;
 

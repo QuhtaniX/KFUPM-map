@@ -11,6 +11,7 @@
     "install-all": "npm install && cd server && npm install && cd ../client && npm install",
     "start": "cd server && npm start",
     "setup": "node setup.js",
+    "test-setup": "node test-setup.js",
     "populate-data": "cd server && node -e \"require('./data/sampleData').populateSampleData().then(() => process.exit())\""
   },
   "keywords": ["kfupm", "schedule", "picker", "academic", "planning"],

@@ -28,10 +28,8 @@ try {
 const envPath = path.join(__dirname, 'server', '.env');
 if (!fs.existsSync(envPath)) {
   console.log('📝 Creating .env file...');
-  const envContent = `MONGODB_URI=mongodb://localhost:27017/kfupm-scheduler
-JWT_SECRET=your-super-secret-jwt-key-change-in-production
-STRIPE_SECRET_KEY=your-stripe-secret-key
-STRIPE_WEBHOOK_SECRET=your-stripe-webhook-secret
+  const envContent = `MONGODB_URI=mongodb://mongo:PAwYKGVMTLgOtnWEJWanEhdHmYOEYJCM@trolley.proxy.rlwy.net:26642
+JWT_SECRET=test1234test
 NODE_ENV=development
 CLIENT_URL=http://localhost:3000
 PORT=5000`;

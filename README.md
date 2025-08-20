@@ -1,256 +1,162 @@
 # KFUPM Smart Section Picker
 
-A comprehensive web application that helps KFUPM students choose optimal class schedules with interactive campus mapping, schedule optimization, and CRN export functionality.
+A smart application to help KFUPM students choose optimal class schedules based on their preferences and constraints.
 
-## 🚀 Features
-
-### Core Features
-- **Smart Schedule Generation**: AI-powered algorithm that creates clash-free schedules
-- **Interactive Campus Map**: Visualize your schedule on KFUPM campus with walking paths
-- **CRN Export**: Export course registration numbers for easy registration
-- **Schedule Comparison**: Compare multiple schedules side-by-side
-- **User Preferences**: Set preferred professors, buildings, and time constraints
-
-### User Interface
-- **Modern React Frontend**: Built with React 18, Tailwind CSS, and Framer Motion
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
-- **Interactive Components**: Real-time schedule updates and map interactions
-- **Beautiful UI**: Clean, modern interface with smooth animations
-
-### Backend Features
-- **Node.js/Express API**: RESTful API with comprehensive endpoints
-- **MongoDB Database**: Scalable NoSQL database for data storage
-- **JWT Authentication**: Secure user authentication and authorization
-- **Schedule Optimization**: Advanced backtracking algorithm for optimal schedules
-
-### Monetization
-- **Free Tier**: 1 schedule per term, basic features
-- **Premium Tier**: Unlimited schedules, advanced filters, map view, CRN export
-- **Stripe Integration**: Secure payment processing
-
-## 🛠️ Technology Stack
-
-### Frontend
-- React 18
-- Tailwind CSS
-- Framer Motion
-- React Router
-- Axios
-- React Leaflet (Interactive Maps)
-- React Select
-- React Hook Form
-
-### Backend
-- Node.js
-- Express.js
-- MongoDB with Mongoose
-- JWT Authentication
-- bcryptjs (Password Hashing)
-- Stripe (Payments)
-- Helmet (Security)
-
-### Development Tools
-- Concurrently (Run frontend/backend simultaneously)
-- Nodemon (Auto-restart server)
-- ESLint
-- Prettier
-
-## 📦 Installation
+## 🚀 Quick Start (Local Development)
 
 ### Prerequisites
 - Node.js (v16 or higher)
-- MongoDB (local or cloud)
-- npm or yarn
+- npm (comes with Node.js)
 
-### Quick Start
+### Setup Instructions
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone <your-repo-url>
    cd kfupm-smart-section-picker
    ```
 
-2. **Install dependencies**
+2. **Install all dependencies**
    ```bash
    npm run install-all
    ```
 
-3. **Set up environment variables**
-   Create `.env` file in the server directory:
-   ```env
-   MONGODB_URI=mongodb://localhost:27017/kfupm-scheduler
-   JWT_SECRET=your-secret-key-here
-   STRIPE_SECRET_KEY=your-stripe-secret-key
-   STRIPE_WEBHOOK_SECRET=your-stripe-webhook-secret
-   NODE_ENV=development
-   CLIENT_URL=http://localhost:3000
-   ```
-
-4. **Populate sample data**
+3. **Test the setup** (optional but recommended)
    ```bash
-   cd server
-   node -e "require('./data/sampleData').populateSampleData().then(() => process.exit())"
+   npm run test-setup
    ```
 
-5. **Start the application**
+4. **Start the application**
    ```bash
    npm run dev
    ```
 
-The application will be available at:
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:5000
+5. **Open your browser**
+   Navigate to `http://localhost:3000`
 
-## 🗄️ Database Setup
+## 📁 Project Structure
 
-### MongoDB Connection
-The application uses MongoDB for data storage. You can use:
-- Local MongoDB installation
-- MongoDB Atlas (cloud)
-- Docker MongoDB container
-
-### Sample Data
-The application includes sample data for:
-- KFUPM buildings with coordinates
-- Sample courses and sections
-- User accounts for testing
+```
+kfupm-smart-section-picker/
+├── client/                 # React frontend
+│   ├── src/
+│   ├── public/
+│   └── package.json
+├── server/                 # Node.js backend
+│   ├── routes/
+│   ├── models/
+│   ├── middleware/
+│   ├── data/
+│   ├── .env               # Environment variables
+│   └── package.json
+├── package.json           # Root package.json
+├── setup.js              # Initial setup script
+├── test-setup.js         # Setup verification script
+└── README.md
+```
 
 ## 🔧 Configuration
 
-### Environment Variables
+The application uses the following environment variables (configured in `server/.env`):
 
-#### Required
-- `MONGODB_URI`: MongoDB connection string
-- `JWT_SECRET`: Secret key for JWT tokens
-
-#### Optional
-- `STRIPE_SECRET_KEY`: Stripe secret key for payments
-- `STRIPE_WEBHOOK_SECRET`: Stripe webhook secret
+- `MONGODB_URI`: MongoDB connection string (Railway)
+- `JWT_SECRET`: Secret key for JWT authentication
 - `NODE_ENV`: Environment (development/production)
-- `CLIENT_URL`: Frontend URL for CORS
-- `PORT`: Backend port (default: 5000)
+- `CLIENT_URL`: Frontend URL (http://localhost:3000)
+- `PORT`: Backend server port (5000)
 
-### Stripe Setup (for payments)
-1. Create a Stripe account
-2. Get your API keys from the dashboard
-3. Set up webhook endpoints
-4. Add keys to environment variables
+## 🎯 Features
 
-## 📱 Usage
+- **Smart Schedule Generation**: AI-powered schedule optimization
+- **Course Management**: Browse and search courses
+- **User Authentication**: Secure login/registration
+- **Schedule Visualization**: Interactive calendar view
+- **Conflict Detection**: Automatic schedule conflict detection
+- **Export Options**: Export schedules in various formats
 
-### For Students
-1. **Register/Login**: Create an account with your KFUPM email
-2. **Set Preferences**: Choose preferred professors, buildings, and constraints
-3. **Select Courses**: Search and select courses for your term
-4. **Generate Schedules**: Get optimized schedules based on your preferences
-5. **View on Map**: Visualize your schedule on the interactive campus map
-6. **Export CRNs**: Get course registration numbers for registration
-7. **Save & Compare**: Save multiple schedules and compare them
+## 🛠️ Available Scripts
 
-### For Administrators
-- Monitor user activity and schedule generation
-- Manage course data and building information
-- View subscription analytics
-- Handle payment processing
+- `npm run dev`: Start both frontend and backend in development mode
+- `npm run server`: Start only the backend server
+- `npm run client`: Start only the frontend client
+- `npm run install-all`: Install dependencies for all packages
+- `npm run test-setup`: Test the local setup configuration
+- `npm run setup`: Run initial setup (creates .env file)
+- `npm run populate-data`: Populate database with sample data
 
-## 🚀 Deployment
-
-### Production Deployment
-
-1. **Build the frontend**
-   ```bash
-   cd client
-   npm run build
-   ```
-
-2. **Set production environment variables**
-   ```env
-   NODE_ENV=production
-   MONGODB_URI=your-production-mongodb-uri
-   JWT_SECRET=your-production-secret
-   STRIPE_SECRET_KEY=your-production-stripe-key
-   ```
-
-3. **Deploy to your preferred platform**
-   - Heroku
-   - Vercel
-   - AWS
-   - DigitalOcean
-
-### Docker Deployment
-```bash
-# Build and run with Docker
-docker-compose up --build
-```
-
-## 📊 API Endpoints
+## 🔌 API Endpoints
 
 ### Authentication
 - `POST /api/auth/register` - User registration
 - `POST /api/auth/login` - User login
-- `GET /api/auth/profile` - Get user profile
+- `GET /api/auth/me` - Get current user
 
 ### Courses
 - `GET /api/courses` - Get all courses
-- `GET /api/courses/:courseCode` - Get specific course
-- `GET /api/courses/departments/list` - Get departments
-- `GET /api/courses/buildings/list` - Get buildings
+- `GET /api/courses/:id` - Get specific course
+- `POST /api/courses` - Create new course (admin)
 
 ### Schedules
-- `POST /api/schedules/generate` - Generate schedules
-- `POST /api/schedules/save` - Save schedule
-- `GET /api/schedules/my-schedules` - Get user schedules
-- `GET /api/schedules/:id/crns` - Get CRNs for schedule
+- `GET /api/schedules` - Get user schedules
+- `POST /api/schedules` - Create new schedule
+- `PUT /api/schedules/:id` - Update schedule
+- `DELETE /api/schedules/:id` - Delete schedule
 
-### Payments
-- `POST /api/payments/create-subscription` - Create premium subscription
-- `GET /api/payments/subscription-status` - Get subscription status
+### Payments (Disabled for local development)
+- Payment endpoints are available but return "service not available" when Stripe is not configured
 
-## 🔒 Security Features
+## 🗄️ Database
 
-- JWT token authentication
-- Password hashing with bcrypt
-- Rate limiting
-- CORS protection
-- Helmet security headers
-- Input validation and sanitization
+The application uses MongoDB hosted on Railway. The database includes:
+
+- **Users**: User accounts and authentication
+- **Courses**: Course information and sections
+- **Schedules**: User-generated schedules
+- **Sections**: Individual class sections
+
+## 🚨 Troubleshooting
+
+### Common Issues
+
+1. **MongoDB Connection Failed**
+   - Check your Railway MongoDB connection string
+   - Ensure the database is accessible from your IP
+
+2. **Port Already in Use**
+   - Change the PORT in `server/.env`
+   - Kill processes using ports 3000 or 5000
+
+3. **Dependencies Not Found**
+   - Run `npm run install-all` to install all dependencies
+   - Check Node.js version (requires v16+)
+
+4. **Environment Variables Missing**
+   - Run `npm run setup` to create the .env file
+   - Verify all required variables are set
+
+### Getting Help
+
+If you encounter issues:
+1. Run `npm run test-setup` to diagnose problems
+2. Check the console for error messages
+3. Verify your MongoDB connection
+4. Ensure all dependencies are installed
+
+## 📝 Development Notes
+
+- **Stripe Integration**: Currently disabled for local development
+- **CORS**: Configured for localhost development
+- **Hot Reload**: Both frontend and backend support hot reloading
+- **Environment**: Uses development configuration by default
 
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Add tests if applicable
+4. Test thoroughly
 5. Submit a pull request
 
-## 📝 License
+## 📄 License
 
 This project is licensed under the MIT License.
-
-## 🆘 Support
-
-For support and questions:
-- Create an issue in the repository
-- Contact the development team
-- Check the documentation
-
-## 🔮 Future Enhancements
-
-- Mobile app development
-- Integration with KFUPM registration system
-- Advanced analytics and insights
-- Social features (schedule sharing)
-- AI-powered course recommendations
-- Real-time course availability updates
-
-## 📈 Performance
-
-- Optimized schedule generation algorithm
-- Database indexing for fast queries
-- Caching for frequently accessed data
-- Lazy loading for better UX
-- Responsive design for all devices
-
----
-
-**Built with ❤️ for KFUPM students**
